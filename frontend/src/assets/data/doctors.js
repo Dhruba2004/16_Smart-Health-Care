@@ -1,0 +1,32 @@
+export const doctors = [
+  {
+    id: "01",
+    name: "Dr. Muhibur Rahaman",
+    specialization: "Surgeon",
+    avgRating: 4.5,
+    totalRating: 272,
+    photo: "https://github.com/devmuhib/Youtube-2023/blob/56a5a61e78b1dc70d750bf047f56de5aa7e92496/frontend/src/assets/images/doctor-img01.png",
+    totalPatients: 1500,
+    hospital: "Mount Adora Hospital, Sylhet.",
+  },
+  {
+    id: "02",
+    name: "Dr. Saleh Mahmud",
+    specialization: "Neurologist",
+    avgRating: 4.8,
+    totalRating: 272,
+    photo: "https://github.com/devmuhib/Youtube-2023/blob/56a5a61e78b1dc70d750bf047f56de5aa7e92496/frontend/src/assets/images/doctor-img02.png",
+    totalPatients: 1500,
+    hospital: "Mount Adora Hospital, Sylhet.",
+  },
+  {
+    id: "03",
+    name: "Dr. Farid Uddin",
+    specialization: "Dermatologist",
+    avgRating: 4.2,
+    totalRating: 272,
+    photo: "https://github.com/devmuhib/Youtube-2023/blob/56a5a61e78b1dc70d750bf047f56de5aa7e92496/frontend/src/assets/images/doctor-img03.png",
+    totalPatients: 1500,
+    hospital: "Mount Adora Hospital, Sylhet.",
+  },
+];

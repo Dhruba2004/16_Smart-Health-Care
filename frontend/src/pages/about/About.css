@@ -1,0 +1,14 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  body{
+    background-color: rgb(217, 231, 226);
+  }
+  .card img :hover{
+    transform: translate(1.2);
+  }
+
+  
+ 
