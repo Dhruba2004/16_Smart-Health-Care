@@ -35,21 +35,53 @@ app.get("/api/doctors", (req, res) => {
       name: "Dr. Pranab Adhikery",
       specialization: "Neurologist",
       avgRating: 4.8,
-      totalRating: 272,
+      totalRating: 980,
       photo: "https://img.freepik.com/free-photo/smiling-doctor-with-strethoscope-isolated-grey_651396-974.jpg?size=626&ext=jpg&ga=GA1.1.2097408625.1694360763&semt=sph",
       totalPatients: 1500,
       hospital: "Mount Adora Hospital, Sylhet.",
     },
     {
       id: "03",
-      name: "Dr. Sourav Ganguly",
+      name: "Dr. Aprabita Maitra",
       specialization: "Dermatologist",
-      avgRating: 4.2,
-      totalRating: 272,
+      avgRating: 4.0,
+      totalRating: 678,
       photo: "https://img.freepik.com/free-photo/smiling-young-female-doctor-wearing-medical-robe-with-stethoscope-spreading-hands-isolated-purple-wall_141793-83025.jpg?size=626&ext=jpg&ga=GA1.1.2097408625.1694360763&semt=sph",
       totalPatients: 1500,
       hospital: "Mount Adora Hospital, Sylhet.",
     },
+    {
+      id: "04",
+      name: "Dr. Roshan Bajaj",
+      specialization: "Orthoprdics",
+      avgRating: 4.9,
+      totalRating: 272,
+      photo: "https://www.shutterstock.com/image-photo/indian-male-doctor-consulting-senior-600nw-2036186195.jpg",
+      totalPatients: 1600,
+      hospital: "Mount Adora Hospital, Sylhet.",
+    },
+    {
+      id: "05",
+      name: "Dr. Atish Ranjan",
+      specialization: "Homeopathy",
+      avgRating: 3.2,
+      totalRating: 123,
+      photo: "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8ZG9jdG9yfGVufDB8fDB8fHww",
+      totalPatients: 500,
+      hospital: "Mount Adora Hospital, Sylhet.",
+    },
+    {
+      id: "06",
+      name: "Dr. Sukriti Adhikary",
+      specialization: "Neurosurgery",
+      avgRating: 4.5,
+      totalRating: 500,
+      photo: "https://www.shutterstock.com/image-photo/profile-photo-attractive-family-doc-600nw-1724693776.jpg",
+      totalPatients: 1500,
+      hospital: "Mount Adora Hospital, Sylhet.",
+
+    }
+    
   ];
   res.send(data);
 });
