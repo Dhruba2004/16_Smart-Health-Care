@@ -1,39 +1,64 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import Navbar from "../../components/navbar/Navbar";
 
 const Login = () => {
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+  const handleInputChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
   return (
     <>
-      <div className="container bg-sky-200 h-[800px] pt-7 mx-auto">
-        <div className="flex justify-center items-center flex-col mt-[7rem] gap-[12px] bg-gray-700 max-w-[50%] mx-auto rounded-2xl py-3 px-7 h-[400px] w-[400px] relative">
-          <form
-            action="POST
-        "
-          >
-            <div className="flex flex-col gap-[22px]">
-              <h1 className="text-center text-[#fff] text-[26px]">Login</h1>
+      <Navbar />
+      <section className="px-5 lg:px-0">
+        <div className="w-full max-w-[570px] mx-auto rounded-lg shadow-md md:p-10 mt-[6rem]">
+          <h3 className="text-headingColor text-[22px] leading-9 font-bold mb-10">
+            Hello! <span className="text-primaryColor">Welcome</span> Back 🙌{" "}
+          </h3>
+          <form className="px-4 md:py-0">
+            <div className="mb-5">
               <input
-                type="text"
-                placeholder="name"
-                className="block outline-none bg-transparent border-b-2 border-[#fff] w-[100%] mx-auto"
+                type="email"
+                placeholder="Enter your email"
+                name="email"
+                value={formData.email}
+                onChange={handleInputChange}
+                className="w-full px-4 py-3 border-b border-solid border-[#0066ff61] focus:outline-none focus:border-b-primaryColor text-[16px] leading-7 text-headingColor placeholder::text-textColor cursor-pointor rounded-md bg-transparent"
+                required
               />
+            </div>
+            <div className="mb-5">
               <input
                 type="password"
-                placeholder="password"
-                className="block outline-none bg-transparent border-b-2 border-[#fff] w-[100%] mx-auto"
+                placeholder="Enter your password"
+                name="password"
+                value={formData.password}
+                onChange={handleInputChange}
+                className="w-full px-4 py-3 border-b border-solid border-[#0066ff61] focus:outline-none focus:border-b-primaryColor text-[16px] leading-7 text-headingColor placeholder::text-textColor cursor-pointor rounded-md bg-transparent"
+                required
               />
-              <div className="flex justify-center items-center mt-4 gap-[1rem] flex-col">
-                <button className="bg-sky-800 text-[#fff]  font-bold px-4 py-2  w-[50%] rounded-2xl hover:bg-[#9acd32] hover:text-[#fff] hover:font-bold">
-                  Submit
-                </button>
-                <p className="text-[#fff]">
-                  Don't have a account? <Link to="/register">Register here</Link>
-                </p>
-              </div>
             </div>
+            <div className="mt-7">
+              <button
+                className="bg-primaryColor w-full text-[#fff] text-[18px] leading-[30px] px-4 py-3 rounded-xl"
+                type="submit"
+              >
+                Login
+              </button>
+            </div>
+            <p className="mt-5 text-textColor text-center">
+              Don&apos;t have account ?
+              <Link to="/register" className="text-primaryColor font-medium ml-1">
+                Register
+              </Link>
+            </p>
           </form>
         </div>
-      </div>
+      </section>
     </>
   );
 };

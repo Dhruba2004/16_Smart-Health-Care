@@ -24,7 +24,7 @@ const SidePanel = () => {
             <p className="text-[15px] leading-6 text-textColor">Wednesday</p>
             <p className="text-[15px] leading-6 text-textColor font-semibold">2:00 PM - 4:00 PM</p>
           </li>
-          <button>Book Appointment</button>
+          <button className="btn px-2  p-3 text-white w-full rounded-md bg-blue-700 mt-5">Book Appointment</button>
         </div>
       </div>
     </div>
