@@ -17,10 +17,7 @@ const DoctorCard = ({ doctor }) => {
     <div className="container">
       <div className="p-3 lg:p-5 bg-[#fff9ea] shadow-panelShadow w-[70%] rounded-3xl gap-[1rem]">
         <div className="">
-          <img
-            src={photo}
-            className="w-[100%] rounded-xl"
-          />
+          <img src={photo} className="w-[100%] rounded-xl" />
         </div>
         <div></div>
         <h2 className="text-[14px] leading-[30px] lg:text-[26px] lg:leading-9 text-headingColor font-700 mt-3 text-center">
@@ -48,11 +45,10 @@ const DoctorCard = ({ doctor }) => {
             </h3>
             <p className="text-[14px] font-[400] leading-6">{hospital}</p>
           </div>
-          <Link
-            className="w-[44px] h-[44px] rounded-full border bordersolid border-[#181A1E] mx-auto flex items-center justify-center group hover:bg-primaryColor hover:border-none"
-            to="/doctors/:id"
-          >
-            <BsArrowRight className="group-hover:text-white w-6 h-5" />
+        </div>
+        <div className=" flex justify-center items-center">
+          <Link className="bg-primaryColor px-4 py-3 text-[#fff] mt-4 rounded-xl" to="/booking">
+            <h2 className="text-[#fff] leading-7"> Book appointment</h2>
           </Link>
         </div>
       </div>
