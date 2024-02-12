@@ -1,25 +1,41 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import axios from 'axios';
 import { formateDate } from "../../utils/formateDate";
 
 const DoctorAbout = () => {
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("/api/doctors")
+      .then((response) => {
+        setData(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  });
   return (
-    <div className="m-4 p-4">
-      <div className="">
-        <h3 className="text-[20px] leading-[30px] text-headingColor font-semibold flex items-center gap-2">
-          About Of
-          <span className="text-irisBlueColor font-bold text-[24px] leading-9">
-            Arnab Basu
-          </span>
-        </h3>
-        <p className="text__para w-[100%] text-[grey]">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magnam
-          nesciunt voluptatum, natus quod deserunt earum fugit, maiores
-          repellendus voluptatem hic blanditiis repellat quo maxime doloribus a
-          temporibus in repudiandae cupiditate vel. Doloribus ea ullam harum
-          soluta dolore quae modi id natus, ratione cum possimus ipsum explicabo
-          adipisci quisquam dolorem porro.
-        </p>
-      </div>
+    <div className="m-4 p-4" >
+      {data.map((item) => (
+        <div className="" key={item.id}>
+          <h3 className="text-[20px] leading-[30px] text-headingColor font-semibold flex items-center gap-2">
+            About Of
+            <span className="text-irisBlueColor font-bold text-[24px] leading-9">
+              {item.name}
+            </span>
+          </h3>
+          <p className="text__para w-[100%] text-[grey]">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magnam
+            nesciunt voluptatum, natus quod deserunt earum fugit, maiores
+            repellendus voluptatem hic blanditiis repellat quo maxime doloribus
+            a temporibus in repudiandae cupiditate vel. Doloribus ea ullam harum
+            soluta dolore quae modi id natus, ratione cum possimus ipsum
+            explicabo adipisci quisquam dolorem porro.
+          </p>
+        </div>
+      ))}
+
       <div className="mt-12">
         <h3 className="text-[20px] leading-[30px] text-headingColor font-semibold">
           Education
