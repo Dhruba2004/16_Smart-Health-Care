@@ -1,9 +1,20 @@
-import React from "react";
+import React,{useState} from "react";
 import starIcon from "../../assets/images/Star.png";
 import { Link } from "react-router-dom";
-import { BsArrowRight } from "react-icons/bs";
+import HashLoader from 'react-spinners/HashLoader';
 
 const DoctorCard = ({ doctor }) => {
+  const [loading, setLoading] = useState(false);
+  const handleClick = () =>{
+    setLoading(true);
+    
+    
+    setTimeout(() => {
+      setLoading(false);
+    }, 1000);
+  }
+
+  
   const {
     name,
     avgRating,
@@ -47,9 +58,10 @@ const DoctorCard = ({ doctor }) => {
           </div>
         </div>
         <div className=" flex justify-center items-center">
-          <Link className="bg-primaryColor px-4 py-3 text-[#fff] mt-4 rounded-xl" to="/booking">
-            <h2 className="text-[#fff] leading-7"> Book appointment</h2>
-          </Link>
+        {loading && <HashLoader color="#fff" size={30} />}
+          <Link className="bg-primaryColor px-4 py-3 text-[#fff] mt-4 rounded-xl leading-7" to="/booking" onClick={handleClick}>
+             Book appointment
+            </Link>
         </div>
       </div>
     </div>

@@ -1,17 +1,64 @@
 import React, { useState } from "react";
 import Navbar from "../../components/navbar/Navbar";
 import sigupImg from "../../assets/images/signup.gif";
-import avatar from "../../assets/images/doctor-img01.png";
+import { toast } from "react-toastify";
+import uploadImageCloudinary from "../../utils/uploadImageCloudinary";
+import { BASE_URL } from "../../config";
+import { useNavigate } from "react-router-dom";
+import HashLoader from "react-spinners/HashLoader";
+import { Link } from "react-router-dom";
+import axios from 'axios';
 
 const Signup = () => {
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [previewURL, setPreviewURL] = useState("");
+  const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
-    username: "",
+    name: "",
     email: "",
     password: "",
+    photo: selectedFile,
+    gender: "",
+    role: "patient",
   });
+  const navigate = useNavigate();
   const handleInputChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
+
+  const handleFileInputChange = async (event) => {
+    const file = event.target.files[0];
+    const data = await uploadImageCloudinary(file);
+    console.log(data);
+
+    setPreviewURL(data.url);
+    setSelectedFile(data.url);
+    setFormData({ ...formData, photo: data.url });
+  };
+
+  const submitHandler = async (event) => {
+    event.preventDefault();
+    setLoading(true);
+    try {
+      const res = await axios.post(`${BASE_URL}/auth/register`,formData, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const { message } = await res.json();
+      if (!res.ok) {
+        throw new Error(message);
+      }
+      setLoading(false);
+      toast.success(message);
+      navigate("/login");
+    } catch (error) {
+      console.log(error)
+      toast.error(error.message);
+      setLoading(false);
+    }
+  };
+
   return (
     <>
       <Navbar />
@@ -31,10 +78,10 @@ const Signup = () => {
               <form action="">
                 <div className="mb-5">
                   <input
-                    type="username"
-                    placeholder="Enter your username"
+                    type="name"
+                    placeholder="Enter your name"
                     name="name"
-                    value={formData.username}
+                    value={formData.name}
                     onChange={handleInputChange}
                     className="w-full px-4 py-3 border-b border-solid border-[#0066ff61] focus:outline-none focus:border-b-primaryColor text-[16px] leading-7 text-headingColor placeholder::text-textColor cursor-pointor rounded-md bg-transparent"
                   />
@@ -61,14 +108,7 @@ const Signup = () => {
                     required
                   />
                 </div>
-                <div className="mt-7">
-                  <button
-                    className="bg-primaryColor w-full text-[#fff] text-[18px] leading-[30px] px-4 py-3 rounded-xl"
-                    type="submit"
-                  >
-                    Register
-                  </button>
-                </div>
+
                 <div className="mb-5 flex items-center justify-between">
                   <label
                     htmlFor=""
@@ -99,11 +139,14 @@ const Signup = () => {
                 </div>
 
                 <div className="mb-5 flex items-center gap-3">
-                  <figure className="w-[60px] h-[60px] rounded-full border-2 border-solid border-primaryColor">
-                    <img src={avatar} className="w-full rounded-full" />
-                  </figure>
+                  {selectedFile && (
+                    <figure className="w-[60px] h-[60px] rounded-full border-2 border-solid border-primaryColor">
+                      <img src={previewURL} className="w-full rounded-full" />
+                    </figure>
+                  )}
                   <div className="relative w-[100px] h-[50px]">
                     <input
+                      onChange={handleFileInputChange}
                       type="file"
                       name="photo"
                       id="customFile"
@@ -117,6 +160,29 @@ const Signup = () => {
                       upload photo
                     </label>
                   </div>
+                </div>
+                <div className="mt-7">
+                  <button
+                    disabled={loading && true}
+                    onClick={submitHandler}
+                    className="bg-primaryColor w-full text-[#fff] text-[18px] leading-[30px] px-4 py-3 rounded-xl"
+                    type="submit"
+                  >
+                    {loading ? (
+                      <HashLoader size={35} color="#ffffff" />
+                    ) : (
+                      "Register"
+                    )}
+                  </button>
+                  <p className="mt-5 text-textColor text-center">
+              Already have a account ?
+              <Link
+                to="/login"
+                className="text-primaryColor font-medium ml-1"
+              >
+                Login
+              </Link>
+            </p>
                 </div>
               </form>
             </div>

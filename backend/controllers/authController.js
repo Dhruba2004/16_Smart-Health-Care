@@ -70,28 +70,28 @@ export const login = async (req, res) => {
       user = doctor;
     }
     if (!user) {
-      return res.status(404).json({ message: "User already exsts" });
+      return res.status(404).json({ message: "User not found" });
     }
 
-    const isPasswordMatch = await bcrypt.compare(req.body.password, user.password);
+    const isPasswordMatch = bcrypt.compare(req.body.password, user.password);
 
     if (!isPasswordMatch) {
       return res
-        .status(500)
+        .status(400)
         .json({ status: false, message: "Invalid credentials" });
     }
     const token = generateToken(user);
 
     const { password, role, appointments, ...rest } = user._doc;
     res
-      .status(400)
+      .status(200)
       .json({
-        status: false,
+        status: true,
         message: "Successfully login",
         token,
         data: { ...rest, role },
       });
   } catch (error) {
-    res.status(500).json({ status: false, message: "Invalid Credentials" });
+    res.status(500).json({ status: false, message: "Failed to login" });
   }
 };

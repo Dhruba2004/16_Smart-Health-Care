@@ -79,7 +79,7 @@ const Navbar = () => {
           </div>
           <div className="flex items-center gap-4 relative right-[2rem]">
             <div className="hidden lg:block">
-              <Link to="/">
+              <Link to="/dashboard">
                 <figure>
                   <img src={userImg} className="w-full rounded-full" />
                 </figure>
