@@ -1,14 +1,58 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useContext, useState } from "react";
+import { Link,useNavigate } from "react-router-dom";
+import { redirect } from "react-router-dom";
+import axios from "axios";
 import Navbar from "../../components/navbar/Navbar";
+import { toast } from "react-toastify";
+import { AuthContext } from "../../context/AuthContext.jsx";
+import HashLoader from "react-spinners/HashLoader";
+import { BASE_URL } from "../../config.js";
 
 const Login = () => {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
+  const navigate = useNavigate()
+  const [loading, setLoading] = useState(false);
+
+  const { dispatch } = useContext(AuthContext);
   const handleInputChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+  const submitHandler = async (event) => {
+    event.preventDefault();
+    setLoading(true);
+    try {
+      const res = await axios.post(`${BASE_URL}/api/v1/auth/login`, formData, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      if (!res.data) {
+        throw new Error("No response data received");
+      }
+      const {
+        token,
+        data: { role },
+      } = res.data;
+      dispatch({
+        type: "LOGIN_SUCCESS",
+        payload: {
+          user: res.data,
+          token,
+          role,
+        },
+      });
+      setLoading(false);
+      navigate("/");
+      console.log("navigating to home page");
+      toast.success(res.data.message);
+      } catch (error) {
+      console.log(error);
+      toast.error(error.message);
+      setLoading(false);
+    }
   };
 
   return (
@@ -44,10 +88,12 @@ const Login = () => {
             </div>
             <div className="mt-7">
               <button
+                disabled={loading && true}
+                onClick={submitHandler}
                 className="bg-primaryColor w-full text-[#fff] text-[18px] leading-[30px] px-4 py-3 rounded-xl"
                 type="submit"
               >
-                Login
+                {loading ? <HashLoader color="#ffffff" size={30} /> : "Login"}
               </button>
             </div>
             <p className="mt-5 text-textColor text-center">

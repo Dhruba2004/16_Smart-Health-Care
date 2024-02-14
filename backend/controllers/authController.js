@@ -78,7 +78,7 @@ export const login = async (req, res) => {
       return res.status(404).json({ message: "User not found" });
     }
 
-    const isPasswordMatch = bcrypt.compare(req.body.password, user.password);
+    const isPasswordMatch = await bcrypt.compare(req.body.password, user.password);
 
     if (!isPasswordMatch) {
       return res
@@ -97,6 +97,7 @@ export const login = async (req, res) => {
         data: { ...rest, role },
       });
   } catch (error) {
+    console.log(error)
     res.status(500).json({ status: false, message: "Failed to login" });
   }
 };
