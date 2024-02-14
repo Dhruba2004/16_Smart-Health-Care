@@ -24,6 +24,10 @@ export const register = async (req, res) => {
     if (user) {
       return res.status(400).json({ message: "User already exists" });
     }
+    const validGenders = ['male', 'female', 'other'];
+    if (!validGenders.includes(gender)) {
+      return res.status(400).json({ message: "Invalid gender" });
+    }
     const salt = await bcrypt.genSalt(10);
     const hashPassword = await bcrypt.hash(password, salt);
 
@@ -52,6 +56,7 @@ export const register = async (req, res) => {
       .status(200)
       .json({ success: true, message: "User successfully created" });
   } catch (err) {
+    console.log(err)
     res.status(500).json({ success: false, message: "Internal server error" });
   }
 };

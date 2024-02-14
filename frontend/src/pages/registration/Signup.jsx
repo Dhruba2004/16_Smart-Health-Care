@@ -7,7 +7,7 @@ import { BASE_URL } from "../../config";
 import { useNavigate } from "react-router-dom";
 import HashLoader from "react-spinners/HashLoader";
 import { Link } from "react-router-dom";
-import axios from 'axios';
+import axios from "axios";
 
 const Signup = () => {
   const [selectedFile, setSelectedFile] = useState(null);
@@ -40,20 +40,23 @@ const Signup = () => {
     event.preventDefault();
     setLoading(true);
     try {
-      const res = await axios.post(`${BASE_URL}/auth/register`,formData, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      const { message } = await res.json();
-      if (!res.ok) {
-        throw new Error(message);
+      const res = await axios.post(
+        `${BASE_URL}/api/v1/auth/register`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      if (!res.data.success) {
+        throw new Error(res.data.message);
       }
       setLoading(false);
-      toast.success(message);
+      toast.success(res.data.message);
       navigate("/login");
     } catch (error) {
-      console.log(error)
+      console.log(BASE_URL);
       toast.error(error.message);
       setLoading(false);
     }
@@ -129,11 +132,14 @@ const Signup = () => {
                   >
                     Gender :
                     <select
-                      name="role"
+                      name="gender"
+                      value={formData.gender}
+                      onChange={handleInputChange}
                       className="text-textColor font-semibold text-[15px] leading-7 px-4 py-3 focus:outline-none bg-transparent"
                     >
                       <option value="male">male</option>
                       <option value="female">female</option>
+                      <option value="other">other</option>
                     </select>
                   </label>
                 </div>
@@ -175,14 +181,14 @@ const Signup = () => {
                     )}
                   </button>
                   <p className="mt-5 text-textColor text-center">
-              Already have a account ?
-              <Link
-                to="/login"
-                className="text-primaryColor font-medium ml-1"
-              >
-                Login
-              </Link>
-            </p>
+                    Already have a account ?
+                    <Link
+                      to="/login"
+                      className="text-primaryColor font-medium ml-1"
+                    >
+                      Login
+                    </Link>
+                  </p>
                 </div>
               </form>
             </div>
