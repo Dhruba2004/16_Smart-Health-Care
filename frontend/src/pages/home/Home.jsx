@@ -16,7 +16,7 @@ function Home() {
           </p>
           <p className="mt-[2rem]">Your health is your greatest asset, worth investing in for a vibrant future. Nourish your body and nurture your soul with small, mindful choices each day, knowing that every step towards wellness is a step towards a richer, more fulfilling life. Wellness isn't just the absence of illness; it's the presence of vitality and resilience.</p>
           <div className="flex gap-[2rem] mt-[2rem]">
-            <Link className="bg-[#187383] px-6 py-4 rounded-2xl text-[#fff] font-[700] text-[16px]">
+            <Link className="bg-[#187383] px-6 py-4 rounded-2xl text-[#fff] font-[700] text-[16px]" to="/booking">
               Request an Appointment
             </Link>
             <Link className="bg-[#fff] px-6 py-4 rounded-xl text-black font-[700] text-[16px] border border-sky-900 outline-none">

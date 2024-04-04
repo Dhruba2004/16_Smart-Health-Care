@@ -7,9 +7,10 @@ import Doctors from "./pages/Doctor/Doctor";
 import Signup from "./pages/registration/Signup";
 import Login from "./pages/registration/Login";
 import BookingPage from "./pages/Doctor/Booking";
-import Dashboard from "./pages/dashboard/Dashboard";
+import Dashboard from "./Dashboard/doctor-account/Dashboard";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import MyAccount from "./Dashboard/user-account/MyAccount";
 
 function App() {
   return (
@@ -19,12 +20,12 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/doctors" element={<Doctors />} />
-
-        <Route path="/services" element={<Services />} />
+         <Route path="/services" element={<Services />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Signup />} />
         <Route path="/booking" element={<BookingPage />} />
-        <Route path="/dashbaord" element={<Dashboard />} />
+        <Route path="/users/profile/me" element={<Dashboard />} />
+        <Route path="/doctors/profile/me" element={<MyAccount/>}/>
       </Routes>
       <ToastContainer />
     </Router>
